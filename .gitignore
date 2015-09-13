@@ -1,0 +1,10 @@
+# Builds
+bin/
+# JetBrains CLion
+*.iml
+.idea/
+*.ipr
+*.iws
+/out/
+.idea_modules/
+atlassian-ide-plugin.xml
