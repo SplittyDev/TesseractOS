@@ -1,7 +1,10 @@
 # Builds
+kernel.elf
 bin/
+iso/
+*.o
+*.iso
 # JetBrains CLion
-*.iml
 .idea/
 *.ipr
 *.iws
