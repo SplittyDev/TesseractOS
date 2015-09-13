@@ -33,19 +33,19 @@
 #define KEY_TERMINATE       '\0'
 #define KEY_BLANK           ' '
 
-void framebuf_init (void);
+void framebuf_init ();
 void putc (const uint8_t);
-void puts (char *);
-void scroll (void);
-void cursor (void);
-void clear (void);
+void puts (const char *);
+void scroll ();
+void cursor ();
+void clear ();
 void set_background_color (uint8_t);
 void set_foreground_color (uint8_t);
 void set_color (uint8_t, uint8_t);
 void putc_internal (uint8_t, bool_t);
-void checkoverflow (void);
-uint16_t makecolor (void);
+void checkoverflow ();
+uint16_t makecolor ();
 uint16_t makeattrib (uint8_t);
-size_t where (void);
+size_t where ();
 
 #endif

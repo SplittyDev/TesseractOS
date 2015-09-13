@@ -22,6 +22,7 @@ LDFLAGS = -T linker.ld -melf_i386
 ASFLAGS = -f elf
 
 all: kernel.elf
+iso: os.iso
 
 kernel.elf: $(OBJS)
 	$(LD) $(LDFLAGS) $(OBJS) -o kernel.elf
@@ -40,7 +41,7 @@ os.iso: kernel.elf
 		iso
 
 run: os.iso
-	qemu-system-i386  -cdrom os.iso
+	qemu-system-i386 -cdrom os.iso -serial file:../serial1.log
 
 %.o: %.c
 	$(CC) $(CCFLAGS) -c $< -o $@

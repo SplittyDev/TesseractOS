@@ -68,7 +68,7 @@ void putc (const uint8_t chr) {
     putc_internal (chr, true);
 }
 
-void puts (char *str) {
+void puts (const char *str) {
     size_t i = 0;
     while (str[i] != KEY_TERMINATE)
         putc_internal (str[i++], false);

@@ -13,8 +13,11 @@ dd MB_CHECKSUM
 
 extern kmain
 loader:
+    cli
     mov esp, kernel_stack + SZ_STACK
     call kmain
+    cli
+    hlt
 
 .loop:
     jmp .loop

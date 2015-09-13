@@ -4,6 +4,8 @@ bin/
 iso/
 *.o
 *.iso
+# Log files
+*.log
 # JetBrains CLion
 .idea/
 *.ipr
