@@ -1,6 +1,8 @@
 #ifndef KERNEL_TYPEDEF_H
 #define KERNEL_TYPEDEF_H
 
+#define NULL                (void *)0
+
 #define true                1
 #define false               0
 

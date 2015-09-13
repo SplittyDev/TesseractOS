@@ -1,8 +1,9 @@
 ENTRY (loader)
 
 SECTIONS {
-    . = 0x00100000;
+    . = 0x100000;
     .text ALIGN (0x1000): {
+        *(.multiboot)
         *(.text)
     }
     .rodata ALIGN (0x1000): {
@@ -14,5 +15,6 @@ SECTIONS {
     .bss ALIGN (0x1000): {
         *(COMMON)
         *(.bss)
+        *(.kernel_stack)
     }
 }

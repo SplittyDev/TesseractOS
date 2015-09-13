@@ -16,8 +16,7 @@ CCFLAGS = -m32 \
 	-finline-functions \
 	-c \
 	-Wall \
-	-Wextra \
-	-Werror
+	-Wextra
 LDFLAGS = -T linker.ld -melf_i386
 ASFLAGS = -f elf
 

@@ -44,6 +44,7 @@ void set_foreground_color (uint8_t);
 void set_color (uint8_t, uint8_t);
 void putc_internal (uint8_t, bool_t);
 void checkoverflow ();
+void reset_color ();
 uint16_t makecolor ();
 uint16_t makeattrib (uint8_t);
 size_t where ();
