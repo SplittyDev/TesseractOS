@@ -16,9 +16,11 @@ CCFLAGS = -m32 \
 	-finline-functions \
 	-c \
 	-Wall \
-	-Wextra
-LDFLAGS = -T linker.ld -melf_i386
-ASFLAGS = -f elf
+	-Wextra \
+	-std=gnu99 \
+	-O0
+LDFLAGS = -T linker.ld -nostdlib -melf_i386
+ASFLAGS = -f elf32
 
 all: kernel.elf
 iso: os.iso

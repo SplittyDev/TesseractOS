@@ -1,20 +1,19 @@
-ENTRY (loader)
+ENTRY (_start)
 
 SECTIONS {
-    . = 0x100000;
-    .text ALIGN (0x1000): {
-        *(.multiboot)
+    . = 1M;
+    .text ALIGN(4096) : {
+        *(multiboot)
         *(.text)
     }
-    .rodata ALIGN (0x1000): {
+    .rodata ALIGN(4096) : {
         *(.rodata*)
     }
-    .data ALIGN (0x1000): {
+    .data ALIGN(4096) : {
         *(.data)
     }
-    .bss ALIGN (0x1000): {
+    .bss ALIGN(4096) : {
         *(COMMON)
         *(.bss)
-        *(.kernel_stack)
     }
 }

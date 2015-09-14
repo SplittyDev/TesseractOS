@@ -19,7 +19,7 @@ struct {
 void idt_init () {
 
 	// Clear IDT
-	memset ((void *)&idt, 0, sizeof(struct idt_entry) * 256);
+	memset (&idt, 0, sizeof(struct idt_entry) * 256);
 
 	// Exceptions
 	idt_set_gate (0x00, (unsigned) handle_intr_0,  0x08, 0x8E);
@@ -105,6 +105,7 @@ void idt_uninstall_handler (uint8_t irq) {
 
 void idt_handle_exception (stackframe_t *frame) {
 	// Print exception message
+    serial_puts (COM1_BASE, exception_messages[frame->intr]);
 	kprintf ("\nEXCEPTION: %s\n", exception_messages[frame->intr]);
 	puts ("[CPU state]\n");
 	kprintf ("GS     : %x\n",  frame->gs);

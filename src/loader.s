@@ -1,7 +1,4 @@
-global loader
-global gdt_flush
-
-section .multiboot
+section multiboot
 
 MB_MAGIC    equ 0x1BADB002
 MB_ALIGN    equ 1 << 0
@@ -14,26 +11,20 @@ align 4
 dd MB_MAGIC
 dd MB_FLAGS
 dd MB_CHECKSUM
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0
-dd 0
-dd 32
 
 section .text
-
+global _start
 extern kmain
-loader:
-    cli
+_start:
     mov esp, stack_top
     call kmain
 
-.loop:
-    jmp .loop
+_stop:
+    cli
+    hlt
+    jmp _stop
 
+global gdt_flush
 gdt_flush:
     mov ax, 0x10
     mov ds, ax
@@ -41,7 +32,8 @@ gdt_flush:
     mov fs, ax
     mov gs, ax
     mov ss, ax
-    jmp 0x08:gdt_flush_cs
+    jmp 0x8:gdt_flush_cs
+    ret
 
 gdt_flush_cs:
     ret
@@ -53,6 +45,11 @@ handle_common_intr:
     push es
     push fs
     push gs
+    mov ax, 0x10
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
     mov eax, esp
     push eax
     call idt_handle_general
@@ -62,7 +59,7 @@ handle_common_intr:
     pop es
     pop ds
     popa
-    add esp, 8
+    add esp, 0x8
     iret
 
 %macro isr_handle_noerr 1
@@ -130,8 +127,7 @@ isr_handle_noerr    45 ; IRQ 13
 isr_handle_noerr    46 ; IRQ 14
 isr_handle_noerr    47 ; IRQ 15
 
-section .kernel_stack
+section .bss
 align 4
-stack_bottom:
-    times 16384 db 0
+resb 8192
 stack_top:
